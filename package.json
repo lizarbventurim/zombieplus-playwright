@@ -1,0 +1,12 @@
+{
+  "description": "Zombie+",
+  "author": {
+    "name": "Lizarb Venturim",
+    "email": "lizarbpacheco@gmail.com"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.27"
+  },
+  "scripts": {}
+}
