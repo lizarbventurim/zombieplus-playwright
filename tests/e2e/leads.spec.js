@@ -19,9 +19,9 @@ test.beforeAll(async () => {
 test('Deve cadastrar um lead na fila de espera ', async ({ page }) => {
 
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm(leadName, leadEmail);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(leadName, leadEmail);
   await page.toast.containText(message);
 
 
@@ -29,9 +29,9 @@ test('Deve cadastrar um lead na fila de espera ', async ({ page }) => {
 
 test('Não deve cadastrar um lead na fila de espera quando o email já tiver cadastrado', async ({ page }) => {
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm(leadName, leadEmail);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(leadName, leadEmail);
   await page.toast.containText(registredEmail);
 
 
@@ -39,39 +39,39 @@ test('Não deve cadastrar um lead na fila de espera quando o email já tiver cad
 
 test('Não deve cadastrar com email incorreto', async ({ page }) => {
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm(leadName, 'lizarbpacheco.com.br');
-  await page.landing.alertHaveText('Email incorreto');
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(leadName, 'lizarbpacheco.com.br');
+  await page.leads.alertHaveText('Email incorreto');
 
 
 });
 
 test('Não deve cadastrar Quando o nome não é preenchido', async ({ page }) => {
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm('', leadEmail);
-  await page.landing.alertHaveText(requiredFiledMessage);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm('', leadEmail);
+  await page.leads.alertHaveText(requiredFiledMessage);
 
 });
 
 test('Não deve cadastrar com email não é preenchido', async ({ page }) => {
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm(leadName, '');
-  await page.landing.alertHaveText(requiredFiledMessage);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(leadName, '');
+  await page.leads.alertHaveText(requiredFiledMessage);
 
 });
 
 test('Não deve cadastrar quando nenhuma informação é preenchida', async ({ page }) => {
 
-  await page.landing.visit();
-  await page.landing.openLeadModal();
-  await page.landing.submitLeadForm('', '');
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm('', '');
 
-  await page.landing.alertHaveText([
+  await page.leads.alertHaveText([
     requiredFiledMessage,
     requiredFiledMessage
   ]);

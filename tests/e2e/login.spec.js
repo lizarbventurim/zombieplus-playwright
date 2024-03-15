@@ -1,16 +1,7 @@
 const { test, expect } = require('../support');
 
-
-
-
-
-
 test("Deve acessar a página administrativa", async ({ page }) => {
-
-    await page.login.visit();
-    await page.login.submitLoginForm('admin@zombieplus.com', 'pwd123');
-    await page.movies.isLoggedIn();
-
+    await page.login.do('admin@zombieplus.com', 'pwd123');
 });
 
 test("Não deve acessar com a senha incorreta", async ({ page }) => {
