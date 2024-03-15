@@ -5,7 +5,7 @@
         "company": "Universal Pictures",
         "select_year": 1970,
         "featured": false,
-        "cover": "caminho/para/a/imagem1.png"
+        "cover": "/covers/movies/mv.jpg"
     },
     "madrugada_dos_mortos": {
         "title": "Madrugada dos Mortos",

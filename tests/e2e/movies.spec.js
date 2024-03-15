@@ -7,7 +7,7 @@ test('Deve poder cadastrar um novo filme', async ({ page }) => {
 
     await page.pgSql(`DELETE FROM movies WHERE title = '${movie.title}'`);
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin');
-    await page.movies.create(movie.title, movie.overview, movie.company, movie.select_year);
+    await page.movies.create(movie.title, movie.overview, movie.company, movie.select_year, movie.cover);
     await page.toast.containText('Cadastro realizado com sucesso!');
 
 });

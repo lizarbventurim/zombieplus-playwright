@@ -9,12 +9,12 @@ export class Movies {
         await this.page.locator('a[href$="register"]').click();
     }
 
-    async submitForm() {    
+    async submitForm() {
         await this.page.getByRole('button', { name: "Cadastrar" }).click();
 
     }
 
-    async create(title, overview, company, select_year) {
+    async create(title, overview, company, select_year, cover) {
 
         await this.goForm();
 
@@ -40,6 +40,8 @@ export class Movies {
             .filter({ hasText: select_year })
             .click();
 
+        await this.page.locator('input[type="file"]')
+            .setInputFiles('tests/support/fixtures/'+ cover);
 
         await this.submitForm();
     }
