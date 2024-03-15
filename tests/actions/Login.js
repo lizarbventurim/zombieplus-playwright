@@ -2,16 +2,24 @@
 const { expect } = require('@playwright/test');
 
 
+
+
 export class Login {
 
     constructor(page) {
         this.page = page;
     }
 
-    async do(email, password) {
+    async do(email, password, username) {
         await this.visit();
         await this.submitLoginForm(email, password);
-        await this.isLoggedIn();
+        await this.isLoggedIn(username);
+    }
+
+    async isLoggedIn(username) {
+        await this.page.waitForLoadState("networkidle");
+        const loggedUser = this.page.locator('.logged-user');
+        await expect(loggedUser).toHaveText(`Olá, ${username}`);
     }
 
     async visit() {
@@ -19,7 +27,6 @@ export class Login {
 
         const loginForm = this.page.locator('.login-form');
         await expect(loginForm).toBeVisible();
-
     }
 
     async submitLoginForm(email, password) {
@@ -35,10 +42,4 @@ export class Login {
         await expect(alert).toHaveText(text);
     }
 
-    async isLoggedIn() {
-        await this.page.waitForLoadState("networkidle");
-        await expect(this.page).toHaveURL(/.*movies/);
-    }
-
-       
 }
