@@ -3,18 +3,20 @@ const { LoginPage } = require("../pages/LoginPage");
 const { MoviesPage } = require("../pages/MoviesPage");
 const { Toast } = require("../pages/Components");
 const { LandingPage } = require("../pages/LandingPage");
-const { executeSQL } = require('../support/database');
+const { executeSQL } = require("../support/database");
 
 const test = base.extend({
     page: async ({ page }, use) => {
-        await use({
-            ...page,
-            login: new LoginPage(page),
-            movies: new MoviesPage(page),
-            toast: new Toast(page),
-            landing: new LandingPage(page),
-            pgSql: executeSQL
-        });
+        
+        const context = page;
+
+        context["login"] = new LoginPage(page);
+        context["movies"] = new MoviesPage(page);
+        context["toast"] = new Toast(page);
+        context["landing"] = new LandingPage(page);
+        context["pgSql"] = executeSQL;
+
+        await use(context);
     },
 });
 
