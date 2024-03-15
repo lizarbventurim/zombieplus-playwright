@@ -1,7 +1,8 @@
 const { test, expect } = require('../support');
+const username = 'Admin';
 
 test("Deve acessar a página administrativa", async ({ page }) => {
-    await page.login.do('admin@zombieplus.com', 'pwd123');
+    await page.login.do('admin@zombieplus.com', 'pwd123', username);
 });
 
 test("Não deve acessar com a senha incorreta", async ({ page }) => {
