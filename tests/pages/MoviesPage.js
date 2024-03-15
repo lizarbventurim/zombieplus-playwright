@@ -10,8 +10,18 @@ export class MoviesPage {
         await expect(this.page).toHaveURL(/.*movies/);
     }
 
-    async create(title, overview, company, select_year) {
+    async goForm() {
         await this.page.locator('a[href$="register"]').click();
+    }
+
+    async submitForm() {    
+        await this.page.getByRole('button', { name: "Cadastrar" }).click();
+
+    }
+
+    async create(title, overview, company, select_year) {
+
+        await this.goForm();
 
         await this.page.waitForResponse((response) => {
             return response.url().includes("/companies") && response.status() === 200;
@@ -27,7 +37,7 @@ export class MoviesPage {
             .filter({ hasText: company })
             .click();
 
-            await this.page
+        await this.page
             .locator("#select_year .react-select__dropdown-indicator")
             .click();
         await this.page
@@ -36,8 +46,11 @@ export class MoviesPage {
             .click();
 
 
-        await this.page.getByRole('button', { name: "Cadastrar" }).click();    
+        await this.submitForm();
     }
 
-    
+    async alertHaveText(target) {
+        await expect(this.page.locator(".alert")).toHaveText(target);
+    }
+
 }
