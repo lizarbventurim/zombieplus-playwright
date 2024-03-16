@@ -12,16 +12,16 @@
         "overview": "Um grupo de sobreviventes busca refúgio em um shopping center enquanto zumbis se espalham pela cidade.",
         "company": "Universal Pictures",
         "select_year": 2004,
-        "featured": false,
+        "featured": true,
         "cover": "/covers/movies/madrugada.jpg"
     },
-    "exterminio": {
+    "delete": {
         "title": "Extermínio",
         "overview": "Após um surto de um vírus que transforma as pessoas em zumbis, um grupo de sobreviventes tenta encontrar segurança.",
-        "company": "Fox Entertainment",
+        "company": "Universal Pictures",
         "select_year": 2002,
-        "featured": false,
-        "cover": "caminho/para/a/imagem3.png"
+        "featured": true,
+        "cover": "/covers/movies/exterminio.jpg"
     },
     "zumbilandia": {
         "title": "Zumbilândia",
