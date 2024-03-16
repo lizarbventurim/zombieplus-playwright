@@ -52,6 +52,16 @@ export class Movies {
         await this.submitForm();
     }
 
+    async search(term) {
+        await this.page.getByPlaceholder('Busque Pelo Nome').fill(term);
+        await this.page.click('.actions button');
+    }
+
+    async tableHaveText(content) {
+        const rows = this.page.getByRole('row')
+        await expect(rows).toHaveText(content);
+    }
+
     async alertHaveText(target) {
         await expect(this.page.locator(".alert")).toHaveText(target);
     }
