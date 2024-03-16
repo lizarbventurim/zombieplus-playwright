@@ -1,3 +1,4 @@
+
 const { expect } = require("@playwright/test");
 
 export class Movies {
@@ -14,7 +15,7 @@ export class Movies {
 
     }
 
-    async create(title, overview, company, select_year, cover) {
+    async create(title, overview, company, select_year, cover, featured) {
 
         await this.goForm();
 
@@ -41,7 +42,12 @@ export class Movies {
             .click();
 
         await this.page.locator('input[type="file"]')
-            .setInputFiles('tests/support/fixtures/'+ cover);
+            .setInputFiles('tests/support/fixtures/' + cover);
+
+        if (featured === true) {
+
+            await this.page.locator('.featured .react-switch').click();
+        }
 
         await this.submitForm();
     }
