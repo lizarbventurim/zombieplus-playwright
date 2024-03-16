@@ -5,3 +5,5 @@ node_modules/
 /playwright/.cache/
 package-lock.json
 /playwright-report/
+/allure-report/
+/allure-results/
