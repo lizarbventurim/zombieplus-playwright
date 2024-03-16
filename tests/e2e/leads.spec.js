@@ -10,9 +10,8 @@ let leadName;
 let leadEmail;
 
 
-
 test.beforeAll(async () => {
-  leadName = faker.person.fullName(); 
+  leadName = faker.person.fullName();
   leadEmail = faker.internet.email();
 })
 
