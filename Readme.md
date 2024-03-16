@@ -17,7 +17,7 @@ Este projeto possui algumas implementações além das propostas no curso, como 
 
 ## 🤖 Como executar
 
-## 🤖 Config DB
+## 🐘 Config DB
 
 Neste projeto, foi utilizado o [ElephantSQl](https://www.elephantsql.com/), um banco na nuvem gratuito para os testes. No entanto ficar a seu criterio o uso de outra plataforma ou até mesmo um banco de dados local.
 
