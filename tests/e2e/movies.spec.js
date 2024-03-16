@@ -8,17 +8,28 @@ test('Deve poder cadastrar um novo filme', async ({ page }) => {
     await page.pgSql(`DELETE FROM movies WHERE title = '${movie.title}'`);
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin');
     await page.movies.create(movie.title, movie.overview, movie.company, movie.select_year, movie.cover);
-    await page.toast.containText('Cadastro realizado com sucesso!');
+    await page.popup.haveText(`O filme '${movie.title}' foi adicionado ao catálogo.`);
 
+});
+
+test('Deve poder excluir um filme cadastrado', async ({ page, request }) => {
+    const movie = data.delete;
+
+    await request.api.postMovie(movie);
+    await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin');
+    await page.click('.request-removal');
+    await page.click('.confirm-removal');
+    await page.popup.haveText(`Filme removido com sucesso.`);
 });
 
 test('Não deve cadastrar quando o filme já estiver cadastrado', async ({ page, request }) => {
     const movie = data.duplicate;
-    
+
     await request.api.postMovie(movie);
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin');
     await page.movies.create(movie.title, movie.overview, movie.company, movie.select_year, movie.cover);
-    await page.toast.containText('Este conteúdo já encontra-se cadastrado no catálogo');
+    await page.popup.haveText(`O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.
+    `);
 
 });
 
@@ -28,9 +39,10 @@ test('Não deve cadastrar quando os campos obrigatórios não forem preenchidos'
     await page.movies.submitForm();
 
     await page.movies.alertHaveText([
-        'Por favor, informe o título.',
-        'Por favor, informe a sinopse.',
-        'Por favor, informe a empresa distribuidora.',
-        'Por favor, informe o ano de lançamento.'
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório'
     ]);
 })
+
