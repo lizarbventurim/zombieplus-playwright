@@ -1,11 +1,13 @@
+require('dotenv').config();
 const { Pool } = require('pg');
 
+
 const DbConfig = {
-    user: 'ibijwwzb',
-    host: 'ziggy.db.elephantsql.com',
-    password: 'z7u7iiLu3-oRhMV4C-0y-fH3wltGADim',
-    database: 'ibijwwzb',
-    port: 5432
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT
 }
 
 export async function executeSQL(sqlScript){
