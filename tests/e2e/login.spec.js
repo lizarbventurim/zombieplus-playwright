@@ -9,8 +9,8 @@ test("Não deve acessar com a senha incorreta", async ({ page }) => {
 
     await page.login.visit();
     await page.login.submitLoginForm('admin@zombieplus.com', 'pwd1234');
-    const message = 'Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.';
-    await page.toast.containText(message);
+    const message = 'Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.';
+    await page.popup.haveText(message);
 
 });
 
