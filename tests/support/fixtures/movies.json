@@ -4,16 +4,16 @@
         "overview": "Um grupo de pessoas fica preso em uma fazenda enquanto tenta sobreviver a uma invasão de zumbis.",
         "company": "Universal Pictures",
         "select_year": 1970,
-        "featured": false,
+        "featured": true,
         "cover": "/covers/movies/mv.jpg"
     },
-    "madrugada_dos_mortos": {
+    "duplicate": {
         "title": "Madrugada dos Mortos",
         "overview": "Um grupo de sobreviventes busca refúgio em um shopping center enquanto zumbis se espalham pela cidade.",
         "company": "Universal Pictures",
         "select_year": 2004,
         "featured": false,
-        "cover": "caminho/para/a/imagem2.png"
+        "cover": "/covers/movies/madrugada.jpg"
     },
     "exterminio": {
         "title": "Extermínio",
