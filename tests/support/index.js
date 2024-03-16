@@ -4,10 +4,11 @@ const { Movies } = require("./actions/Movies");
 const { Toast } = require("./actions/Components");
 const { Leads } = require("./actions/Leads");
 const { executeSQL } = require("../support/database");
+const { Api } = require("./api");
 
 const test = base.extend({
     page: async ({ page }, use) => {
-        
+
         const context = page;
 
         context["login"] = new Login(page);
@@ -18,6 +19,14 @@ const test = base.extend({
 
         await use(context);
     },
+
+    request: async ({ request }, use) => {
+        const context = request;
+        context['api'] = new Api(request);
+        await context['api'].setToken();
+
+        await use(context);
+    }
 });
 
 export { test, expect };
