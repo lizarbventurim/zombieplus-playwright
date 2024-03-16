@@ -23,92 +23,38 @@
         "featured": true,
         "cover": "/covers/movies/exterminio.jpg"
     },
-    "zumbilandia": {
-        "title": "Zumbilândia",
-        "overview": "Um grupo de sobreviventes forma uma equipe improvável enquanto luta para sobreviver em um mundo infestado por zumbis.",
-        "company": "Columbia Pictures",
-        "select_year": 2009,
-        "featured": false,
-        "cover": "caminho/para/a/imagem4.png"
-    },
-    "guerra_mundial_z": {
-        "title": "Guerra Mundial Z",
-        "overview": "Um ex-investigador da ONU é enviado para encontrar a fonte de um vírus que transforma as pessoas em zumbis e evitar o colapso da humanidade.",
-        "company": "Paramount Pictures",
-        "select_year": 2013,
-        "featured": false,
-        "cover": "caminho/para/a/imagem5.png"
-    },
-    "resident_evil_o_hospede_maldito": {
-        "title": "Resident Evil: O Hóspede Maldito",
-        "overview": "Um grupo de comandos de elite deve lutar contra zumbis e outras criaturas mutantes após um experimento genético dar errado.",
-        "company": "Screen Gems",
-        "select_year": 2002,
-        "featured": false,
-        "cover": "caminho/para/a/imagem6.png"
-    },
-    "28_dias_depois": {
-        "title": "28 Dias Depois",
-        "overview": "Um homem acorda em um hospital abandonado em Londres e descobre que uma praga transformou a maioria da população em zumbis.",
-        "company": "Fox Entertainment",
-        "select_year": 2002,
-        "featured": false,
-        "cover": "caminho/para/a/imagem7.png"
-    },
-    "a_morte_do_demonio": {
-        "title": "A Morte do Demônio",
-        "overview": "Um grupo de amigos luta pela sobrevivência enquanto são atacados por demônios possuídos por zumbis.",
-        "company": "New Line Cinema",
-        "select_year": 1981,
-        "featured": false,
-        "cover": "caminho/para/a/imagem8.png"
-    },
-    "shaun_of_the_dead": {
-        "title": "Shaun of the Dead",
-        "overview": "Um homem tenta salvar sua namorada e sua mãe enquanto lida com um apocalipse zumbi.",
-        "company": "Universal Pictures",
-        "select_year": 2004,
-        "featured": false,
-        "cover": "caminho/para/a/imagem9.png"
-    },
-    "dia_dos_mortos": {
-        "title": "Dia dos Mortos",
-        "overview": "Sobreviventes de um apocalipse zumbi buscam refúgio em um complexo militar subterrâneo.",
-        "company": "United Film Distribution Company",
-        "select_year": 1985,
-        "featured": false,
-        "cover": "caminho/para/a/imagem10.png"
-    },
-    "rec": {
-        "title": "REC",
-        "overview": "Um repórter e sua câmera acompanham uma equipe de bombeiros em uma missão, apenas para descobrir que estão enfrentando um vírus que transforma as pessoas em zumbis.",
-        "company": "Filmax",
-        "select_year": 2007,
-        "featured": false,
-        "cover": "caminho/para/a/imagem11.png"
-    },
-    "eu_sou_a_lenda": {
-        "title": "Eu Sou a Lenda",
-        "overview": "Um cientista é possivelmente o último homem na Terra e luta para sobreviver enquanto tenta encontrar uma cura para um vírus que transformou o resto da humanidade em zumbis.",
-        "company": "Warner Bros. Pictures",
-        "select_year": 2007,
-        "featured": false,
-        "cover": "caminho/para/a/imagem12.png"
-    },
-    "dead_alive": {
-        "title": "Dead Alive",
-        "overview": "Um homem luta para proteger sua mãe e sua namorada de uma infestação zumbi que se espalha por sua cidade.",
-        "company": "Rimfire Films",
-        "select_year": 1992,
-        "featured": false,
-        "cover": "caminho/para/a/imagem13.png"
-    },
-    "a_volta_dos_mortos_vivos": {
-        "title": "A Volta dos Mortos-Vivos",
-        "overview": "Funcionários de uma funerária inadvertidamente liberam um gás que faz os mortos voltarem à vida como zumbis famintos por cérebros.",
-        "company": "Orion Pictures",
-        "select_year": 1985,
-        "featured": false,
-        "cover": "caminho/para/a/imagem14.png"
+    "search": {
+        "input": "zumbi",
+        "outputs": [
+            "Zumbilândia",
+            "28 Dias Depois",
+            "Resident Evil: O Hóspede Maldito"
+        ],
+        "data": [
+            {
+                "title": "Zumbilândia",
+                "overview": "Um grupo de sobreviventes forma uma equipe improvável enquanto luta para sobreviver em um mundo infestado por zumbis.",
+                "company": "Netflix",
+                "select_year": 2009,
+                "featured": false,
+                "cover": "caminho/para/a/imagem4.png"
+            },
+            {
+                "title": "28 Dias Depois do Zumbi",
+                "overview": "Um homem acorda em um hospital abandonado em Londres e descobre que uma praga transformou a maioria da população em zumbis.",
+                "company": "Universal Pictures",
+                "select_year": 2002,
+                "featured": false,
+                "cover": "caminho/para/a/imagem7.png"
+            },
+            {
+                "title": "Resident Evil: O Hóspede Maldito - Zumbi",
+                "overview": "Um grupo de comandos de elite deve lutar contra zumbis e outras criaturas mutantes após um experimento genético dar errado.",
+                "company": "Universal Pictures",
+                "select_year": 2002,
+                "featured": false,
+                "cover": "caminho/para/a/imagem6.png"
+            }
+        ]
     }
 }
