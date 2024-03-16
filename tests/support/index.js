@@ -1,7 +1,7 @@
 const { test: base, expect } = require("@playwright/test");
 const { Login } = require("./actions/Login");
 const { Movies } = require("./actions/Movies");
-const { Toast } = require("./actions/Components");
+const { Popup } = require("./actions/Components");
 const { Leads } = require("./actions/Leads");
 const { executeSQL } = require("../support/database");
 const { Api } = require("./api");
@@ -13,7 +13,7 @@ const test = base.extend({
 
         context["login"] = new Login(page);
         context["movies"] = new Movies(page);
-        context["toast"] = new Toast(page);
+        context["popup"] = new Popup(page);
         context["leads"] = new Leads(page);
         context["pgSql"] = executeSQL;
 
