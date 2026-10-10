@@ -12,7 +12,7 @@ let leadName;
 let leadEmail;
 
 test.beforeAll(async () => {
-  executeSQL(`DELETE FROM leads`);
+  await executeSQL(`DELETE FROM leads`);
   leadName = faker.person.fullName();
   leadEmail = faker.internet.email();
 });

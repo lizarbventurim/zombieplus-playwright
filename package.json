@@ -1,26 +1,39 @@
 {
-  "description": "Zombie+",
+  "name": "zombieplus-playwright",
+  "version": "2.0.0",
+  "description": "Testes automatizados E2E e de API do Zombie+ com Playwright",
   "license": "ISC",
   "author": {
     "name": "Lizarb Venturim",
     "email": "lizarbpacheco@gmail.com"
   },
-  "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
-    "@playwright/test": "^1.42.1",
-    "@types/node": "^20.11.27",
-    "allure-commandline": "^2.27.0",
-    "allure-playwright": "^2.14.1",
-    "npm-run-all": "^4.1.5",
-    "pg": "^8.11.3"
+  "private": true,
+  "engines": {
+    "node": ">=20"
   },
   "scripts": {
     "api": "cd api && npm run api",
     "web": "cd web && npm run web",
     "start": "npm-run-all --parallel web api",
-    "test": "npx playwright test"
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:setup": "cd api && sh db.sh",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "allure": "allure generate allure-results --clean -o allure-report && allure open allure-report"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^22.0.0",
+    "allure-commandline": "^2.46.1",
+    "allure-playwright": "^3.13.0",
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.23.1"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^18.0.7"
   }
 }

@@ -1,69 +1,77 @@
 ![poster](https://raw.githubusercontent.com/qaxperience/thumbnails/main/playwright-zombie.png)
 
-## 🤘 Sobre
+# Zombie+ | Testes automatizados com Playwright
 
-Repositório do projeto de testes automatizados do sistema Zombie Plus, construído no curso Playwright Zombie Edition! O Playwright é uma ferramenta de código aberto desenvolvida pela Microsoft que revoluciona a automação de testes em sistemas web, oferecendo uma abordagem eficaz e altamente confiável.
+[![Testes E2E](https://github.com/lizarbventurim/zombieplus-playwright/actions/workflows/playwright.yml/badge.svg)](https://github.com/lizarbventurim/zombieplus-playwright/actions/workflows/playwright.yml)
 
+Projeto de testes automatizados (E2E e API) do sistema **Zombie Plus**, criado no curso Playwright Zombie Edition e evoluído com práticas de mercado: pipeline no GitHub Actions, banco local com Docker, relatórios Playwright e Allure e testes sem dependência de dados antigos.
 
-Este projeto possui algumas implementações além das propostas no curso, como a execução da API e da aplicação web com um único comando, utilizando o arquivo desenvolvido start.sh.
+## 🧪 O que é testado
+
+| Área | Cenários |
+| --- | --- |
+| Login | acesso válido, senha incorreta, e-mail inválido e campos obrigatórios |
+| Leads (fila de espera) | cadastro, e-mail duplicado, e-mail inválido e campos obrigatórios |
+| Filmes (catálogo) | cadastro, exclusão, título duplicado, campos obrigatórios e busca |
+
+Os dados de apoio são criados pela API e pelo banco (PostgreSQL), e os testes seguem o padrão **Page Actions + fixtures**, em `tests/support`.
 
 ## 💻 Tecnologias
-- [Node.js](https://nodejs.org/)
-- [Playwright](https://playwright.dev/)
-- [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-- [Faker](https://www.npmjs.com/package/@faker-js/faker)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Allure](https://allurereport.org/)
 
-## 🤖 Como executar
+[Node.js](https://nodejs.org/) · [Playwright](https://playwright.dev/) · JavaScript · [Faker](https://fakerjs.dev/) · PostgreSQL · Docker · [Allure](https://allurereport.org/) · GitHub Actions
 
-## 🐘 Config DB
+## 🚀 Como executar
 
-Neste projeto, foi utilizado o [ElephantSQl](https://www.elephantsql.com/), um banco na nuvem gratuito para os testes. No entanto ficar a seu criterio o uso de outra plataforma ou até mesmo um banco de dados local.
+Pré-requisitos: Node.js 20 ou superior e Docker.
 
-Renomeie o arquivo .env.example para .env e insira as informações abaixo, completando o que está no bloco do 'Database'.
-
-```
-BASE_API=http://localhost:3333
-BASE_URL=http://localhost:3000
-
-# Database
-DB_HOST= 
-DB_DATABASE=
-DB_USER=
-DB_PASSWORD=
-DB_PORT=
-```
-
-
-1. Clonar o repositório, instalar as dependências para rodar o projeto de automação
-```
+```bash
+# 1. dependências (raiz, API e web)
 npm install
-```
+npm --prefix api install
+npm --prefix web install
 
-2. Instalar dependẽncias da api
-```
-cd api && npm install
-```
+# 2. variáveis de ambiente (os valores já servem para o banco do Docker)
+cp .env.example .env
+cp api/.env.example api/.env
 
-3. Instalar dependẽncias da web
-```
-cd web && npm install
-```
+# 3. banco PostgreSQL, tabelas e dados iniciais
+npm run db:up
+npm run db:setup
 
-4. Iniciar aplicação para rodar os testes
-```
-chmod +x start.sh
+# 4. aplicação (API na porta 3333 e web na 3000)
 npm run start
+
+# 5. em outro terminal: navegador do Playwright e testes
+npx playwright install chromium
+npm test
 ```
 
-5. Executar testes em Headless
+### Outros comandos
+
+| Comando | O que faz |
+| --- | --- |
+| `npm run test:ui` | abre o modo interativo do Playwright |
+| `npm run test:headed` | roda com o navegador visível |
+| `npm run report` | abre o relatório HTML do Playwright |
+| `npm run allure` | gera e abre o relatório do Allure |
+| `npm run db:down` | desliga o banco |
+
+## 🤖 Integração contínua
+
+A cada push e pull request, o workflow [`playwright.yml`](.github/workflows/playwright.yml) sobe um PostgreSQL, cria as tabelas, inicia a API e a web, executa todos os testes e publica os relatórios como artefatos da execução.
+
+## 📁 Estrutura
+
 ```
-npm run test
+tests/
+  e2e/          # cenários (login, leads, movies)
+  support/      # actions, API helper, banco, fixtures
+api/            # API do Zombie+ (do curso)
+web/            # aplicação web já compilada (do curso)
+docker-compose.yml
+.github/workflows/playwright.yml
 ```
 
-6. Executar ver o relatório dos testes
-```
-allure generate
-allure open
-```
+## ✍️ Autor
+
+**Lizarb Venturim**, Senior QA Engineer · [LinkedIn](https://www.linkedin.com/in/lizarbventurim/) · [Portfólio](https://lizarb.venturim.me)

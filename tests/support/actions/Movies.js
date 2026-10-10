@@ -17,11 +17,13 @@ export class Movies {
 
     async create(title, overview, company, select_year, cover, featured) {
 
-        await this.goForm();
-
-        await this.page.waitForResponse((response) => {
+        // registra a espera ANTES do clique, senão a resposta pode chegar antes do listener (teste instável)
+        const companiesLoaded = this.page.waitForResponse((response) => {
             return response.url().includes("/companies") && response.status() === 200;
         });
+
+        await this.goForm();
+        await companiesLoaded;
 
         await this.page.getByLabel("Titulo do filme").fill(title);
         await this.page.getByLabel("Sinopse").fill(overview);

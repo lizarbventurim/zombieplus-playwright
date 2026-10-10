@@ -3,8 +3,13 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-package-lock.json
 /playwright-report/
 /allure-report/
 /allure-results/
 .env
+.env
+api/.env
+!.env.example
+!api/.env.example
+/test-results/
+.DS_Store

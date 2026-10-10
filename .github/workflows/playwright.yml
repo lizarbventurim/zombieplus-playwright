@@ -1,0 +1,90 @@
+name: Testes E2E (Playwright)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: zombie
+          POSTGRES_PASSWORD: zombie
+          POSTGRES_DB: zombieplus
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U zombie -d zombieplus"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      # API
+      DB_DIALECT: postgres
+      DB_HOST: localhost
+      DB_NAME: zombieplus
+      DB_USER: zombie
+      DB_PASS: zombie
+      DB_PORT: 5432
+      PORT: 3333
+      FRONT_URL: http://localhost:3000
+      # Testes
+      BASE_API: http://localhost:3333
+      BASE_URL: http://localhost:3000
+      DB_DATABASE: zombieplus
+      DB_PASSWORD: zombie
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: |
+          npm ci
+          npm --prefix api install --no-audit --no-fund
+          npm --prefix web install --no-audit --no-fund
+
+      - name: Instalar o Chromium do Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Criar tabelas e dados iniciais
+        working-directory: api
+        run: |
+          npx sequelize db:migrate
+          npx sequelize db:seed:all
+
+      - name: Subir API e Web
+        run: |
+          (cd api && nohup npx nodemon src/server.js > ../api.log 2>&1 &)
+          (cd web && nohup npx serve -s build -l 3000 > ../web.log 2>&1 &)
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:3000 > /dev/null && curl -s http://localhost:3333 > /dev/null && exit 0
+            sleep 2
+          done
+          echo "Aplicação não subiu"; cat api.log web.log; exit 1
+
+      - name: Executar testes
+        run: npx playwright test
+
+      - name: Publicar relatórios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios
+          path: |
+            playwright-report/
+            allure-results/
+            test-results/
+          retention-days: 14

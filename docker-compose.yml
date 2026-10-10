@@ -1,0 +1,22 @@
+# Banco PostgreSQL local para a API do Zombie+ e para os testes.
+# Substitui o ElephantSQL, que foi descontinuado.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: zombieplus-db
+    environment:
+      POSTGRES_USER: zombie
+      POSTGRES_PASSWORD: zombie
+      POSTGRES_DB: zombieplus
+    ports:
+      - "5432:5432"
+    volumes:
+      - zombieplus-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zombie -d zombieplus"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  zombieplus-data:

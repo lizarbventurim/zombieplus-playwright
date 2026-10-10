@@ -1,5 +1,11 @@
 const { test, expect } = require("../support");
 const data = require("../support/fixtures/movies.json");
+const { executeSQL } = require("../support/database");
+
+// garante um catálogo limpo: os testes podem ser executados várias vezes sem depender de dados antigos
+test.beforeAll(async () => {
+    await executeSQL(`DELETE FROM movies`);
+});
 
 test("Deve poder cadastrar um novo filme", async ({ page }) => {
     const movie = data.create;
@@ -65,13 +71,14 @@ test("Não deve cadastrar quando os campos obrigatórios não forem preenchidos"
 test("Deve realizar busca pelo termo zumbi", async ({ page, request }) => {
     const movies = data.search;
 
-    movies.data.forEach(async (m) => {
+    for (const m of movies.data) {
         await request.api.postMovie(m);
-    });
+    }
     await page.login.do("admin@zombieplus.com", "pwd123", "Admin");
-    await page.movies.search(movies.input);
 
-    await page.waitForResponse((response) => {
+    const searchResponse = page.waitForResponse((response) => {
         return response.url().includes("/movies") && response.status() === 200;
     });
+    await page.movies.search(movies.input);
+    await searchResponse;
 });
